@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "hello"
+rofi -show fb -modi fb:./test.sh
+echo "bye"
+rm -rf "rofi-location-24Pi"
+echo "you still here?"

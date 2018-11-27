@@ -1,0 +1,192 @@
+
+; vim:ft=cfg
+;     _____
+;    (, /   )    /)      /)
+;     _/__ / ___//      (/_ _   __
+;     /     (_)(/_ (_/_/_) (_(_/ (_
+;  ) /            .-/
+; (_/            (_/
+
+[colors]
+background = ${xrdb:color0}
+foreground = ${xrdb:color1}
+
+red     = ${xrdb:color1}
+orange  = ${xrdb:color9}
+yellow  = ${xrdb:color3}
+green   = ${xrdb:color2}
+cyan    = ${xrdb:color6}
+blue    = ${xrdb:color4}
+magenta = ${xrdb:color5}
+white   = ${xrdb:color7}
+
+[global/wm]
+margin-top        = 0
+margin-bottom     = 0
+override-redirect = false
+
+font-0 = inconsolata:size=20;3
+line-size = 2
+line-color = #f00
+
+[settings]
+compositing-underline = over
+
+
+[bar/temp]
+modules-center = temp1
+underline-size = 4
+underline-color = #f00
+
+
+[module/temp1]
+type = custom/text
+format-underline = #CC6666
+content = "%{u#cc6666 +u} %{B#899d6b}%{F#000000}%{T1}  "
+label-focused-underline = #CC6666
+
+
+
+[bar/main]
+width = 100%
+height = 40
+offset-x = 0
+offset-y = 0
+
+font-0 = inconsolata:size=15;1
+font-1 = SauceCodePro Nerd Font:size=20;3
+font-2 = SauceCodePro Nerd Font:size=20;3
+
+underline-size = 4
+underline-color = #f00
+
+
+bottom = false
+modules-left = arch workspace
+modules-center = newsfeed
+modules-right = battery date
+
+
+[module/date]
+type                     = internal/date
+interval                 = 1
+date                     = "%I:%M %p"
+format-padding           = 3
+format-background        = #000000
+format-foreground        = #E481AD
+
+format-underline = #E481AD
+
+
+[module/arch]
+type = custom/text
+content = "%{U#899d6b +u}%{F#899d6b}%{B#000000}%{T1}  %{-u}"
+format-foreground 	= #899d6b
+format-underline 	= #899d6b
+
+[module/newsfeed]
+type = custom/script
+exec = /home/hydrolous/scripts/newsfeed.sh
+tail = true
+interval = 20
+format-underline = #FFFFFF
+
+[module/workspace]
+type = custom/script
+exec = /home/hydrolous/scripts/workspace.sh
+tail = true
+interval = 0.3
+
+
+[module/musicicon]
+type              = custom/script
+exec              = echo ""
+interval          = 40
+format-padding    = 2
+format-background = ${colors.green}
+format-foreground = ${colors.background}
+
+[module/music]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+interval = 2
+
+format-online = <label-song>
+format-online-padding = 0
+
+label-song         = "%title% - %artist%"
+label-song-foreground         = ${xrdb:color7}
+label-song-background         = ${colors.background}
+label-song-maxlen = 60
+label-song-padding = 4
+
+[module/essid]
+#inherit = module/network
+
+format-connected = <label-connected>
+format-connected-padding = 0
+
+format-connected-prefix            = ""
+format-connected-prefix-padding    = 2
+format-connected-prefix-background = ${colors.background}
+format-connected-prefix-foreground = ${colors.foreground}
+
+label-connected            = "%essid%"
+label-connected-background            = ${colors.magenta}
+label-connected-foreground            = ${colors.background}
+label-connected-padding    = 3
+
+format-disconnected =
+
+format-disconnected-prefix            = ""
+format-disconnected-prefix-padding    = 0
+format-disconnected-prefix-foreground = ${colors.magenta}
+
+label-disconnected            = "disconnected"
+label-disconnected-padding    = 1
+
+[module/battery]
+type          = internal/battery
+full-at       = 98
+battery       = BAT0
+adapter       = AC0
+poll-interval = 5
+
+format-charging = <label-charging>
+format-charging-padding = 0
+
+format-underline = #CC6666
+
+label-charging            = "%percentage%% "
+label-charging-background = #FFFFFFF
+label-charging-foreground = #FFFFFFF
+label-charging-padding    = 1
+
+format-discharging = <label-discharging>
+format-discharging-padding = 0
+
+format-discharging-prefix            = "   "
+format-discharging-prefix-background = #bfacd3
+format-discharging-prefix-foreground = #000000
+format-discharging-prefix-padding    = 0
+
+label-discharging            = "%percentage%% "
+label-discharging-background = #bfacd3
+label-discharging-foreground = #000000
+label-discharging-padding    = 1
+
+format-full = <label-full>
+format-full-padding = 0
+
+format-full-prefix            = "   "
+format-full-prefix-background = ${xrdb:color0}
+format-full-prefix-foreground = ${xrdb:color4}
+format-full-prefix-padding    = 0
+
+label-full            = "%percentage%% "
+label-full-background = ${colors.background}
+label-full-foreground = ${xrdb:color7}
+label-full-padding    = 1
